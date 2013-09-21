@@ -1,0 +1,7 @@
+#!/bin/bash
+
+if [ -x /usr/bin/steam-manager ]; then
+	/usr/bin/steam-manager &
+fi
+
+exec /usr/bin/steam -bigpicture "${@}"

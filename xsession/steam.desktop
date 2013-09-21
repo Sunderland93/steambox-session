@@ -1,0 +1,6 @@
+[Desktop Entry]
+Name=Steam Box
+Comment=This session will start Steam in Big Picture mode
+Exec=steambox
+TryExec=steambox
+Type=Application
