@@ -1,7 +1,4 @@
 #!/bin/bash
 
-if [ -x /usr/bin/steam-manager ]; then
-	/usr/bin/steam-manager &
-fi
-
-exec /usr/bin/steam -bigpicture "${@}"
+/usr/bin/steam-manager &
+exec /usr/bin/steambox-run

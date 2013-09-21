@@ -1,0 +1,4 @@
+#!/bin/bash
+
+cd /usr/lib/steam-manager || exit 1
+exec ./manager.py

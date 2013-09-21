@@ -18,10 +18,15 @@ install:
 	for d in $(SUBDIRS); do $(MAKE) -C $$d install; done
 
 	install -d $(DESTDIR)/$(LIBEXECDIR)
-	install -m 0755 libexec/sabayon-steambox.sh $(DESTDIR)/$(LIBEXECDIR)/
+	install -m 0755 libexec/* $(DESTDIR)/$(LIBEXECDIR)/
 
 	install -d $(DESTDIR)/$(UBINDIR)
-	install -m 0755 bin/steambox $(DESTDIR)/$(UBINDIR)/
+	install -m 0755 bin/* $(DESTDIR)/$(UBINDIR)/
+
+	install -d $(DESTDIR)/$(LIBDIR)/steam-manager
+	install -m 0644 manager/manager.ui $(DESTDIR)/$(LIBDIR)/steam-manager/
+	install -m 0644 manager/*.png $(DESTDIR)/$(LIBDIR)/steam-manager/
+	install -m 0755 manager/manager.py $(DESTDIR)/$(LIBDIR)/steam-manager/
 
 	install -d $(DESTDIR)/$(SYSTEMD_UNITDIR)/
 	install -m 0644 systemd/*.service $(DESTDIR)/$(SYSTEMD_UNITDIR)/
