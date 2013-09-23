@@ -1,4 +1,16 @@
 #!/bin/bash
 
 export STEAM_RUNTIME=1
-exec /usr/bin/steam -bigpicture "${@}"
+
+wrapper=
+is_optimus=$(cat /proc/cmdline | grep optimus)
+if [ -n "${is_optimus}" ]; then
+    if [ -e /usr/bin/primusrun ]; then
+        wrapper=/usr/bin/primusrun
+    elif [ -e /usr/bin/optirun ]; then
+        wrapper=/usr/bin/optirun
+    fi
+fi
+
+
+exec ${wrapper} /usr/bin/steam steam://open/bigpicture

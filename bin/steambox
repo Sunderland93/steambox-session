@@ -1,4 +1,6 @@
 #!/bin/bash
 
-/usr/bin/steam-manager &
-exec /usr/bin/steambox-run
+xsetroot -solid black &
+metacity --replace &
+
+exec /usr/bin/steam-manager
