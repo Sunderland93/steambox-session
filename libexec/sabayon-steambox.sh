@@ -16,11 +16,11 @@ if sabayon_is_steambox; then
         # oh my fucking glorious god, this
         # is AccountsService bullshit
         # cross fingers
-        /usr/libexec/gdm-set-default-session steam
+        /usr/libexec/gdm-set-default-session steambox
     fi
     if [ -x "/usr/libexec/gdm-set-session" ]; then
         # GDM 3.6 support
-        /usr/libexec/gdm-set-session "${LIVE_USER}" steam
+        /usr/libexec/gdm-set-session "${LIVE_USER}" steambox
     fi
     sabayon_setup_autologin
 
