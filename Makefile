@@ -1,5 +1,6 @@
 SUBDIRS =
 DESTDIR = 
+XSESSIONDIR ?= /usr/share/xsessions
 UBINDIR ?= /usr/bin
 LIBDIR ?= /usr/lib
 USBINDIR ?= /usr/sbin
