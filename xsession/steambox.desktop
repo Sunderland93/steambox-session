@@ -1,5 +1,5 @@
 [Desktop Entry]
-Name=Steam Box
+Name=SteamBox
 Comment=This session will start Steam in Big Picture mode
 Exec=steambox
 TryExec=steambox
