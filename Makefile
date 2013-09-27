@@ -7,6 +7,7 @@ USBINDIR ?= /usr/sbin
 LIBEXECDIR ?= /usr/libexec
 SYSCONFDIR ?= /etc
 SYSTEMD_UNITDIR ?= $(LIBDIR)/systemd/system
+DBUSDIR ?= /etc/dbus-1/system.d
 SYSV_INITDIR = /etc/init.d
 
 all:
@@ -26,6 +27,9 @@ install:
 
 	install -d $(DESTDIR)/$(XSESSIONDIR)
 	install -m 0644 xsession/steambox.desktop $(DESTDIR)/$(XSESSIONDIR)/
+
+	install -d $(DESTDIR)/$(DBUSDIR)
+	install -m 0644 dbus/Steam.ConsoleKit.conf $(DESTDIR)/$(DBUSDIR)/
 
 	install -d $(DESTDIR)/$(LIBDIR)/steam-manager
 	install -m 0644 manager/manager.ui $(DESTDIR)/$(LIBDIR)/steam-manager/

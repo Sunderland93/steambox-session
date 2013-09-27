@@ -24,9 +24,16 @@ if sabayon_is_steambox; then
     fi
     sabayon_setup_autologin
 
-elif ! sabayon_is_live && ! sabayon_is_steambox; then
+    # dive into the final executable
+    exec /usr/libexec/steambox-consolekit
+fi
+
+# if we get here, we need to loop forever.
+if ! sabayon_is_live && ! sabayon_is_steambox; then
     echo "Sabayon Steam Box mode disabled"
     sabayon_disable_autologin
 fi
 
-exit 0
+while true; do
+    sleep 7d
+done

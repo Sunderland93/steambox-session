@@ -1,15 +1,12 @@
 #!/sbin/runscript
 
+command="/usr/libexec/sabayon-steambox.sh"
+description="Sabayon SteamBox service"
+
 depend() {
 	after mtab sabayonlive
 	before xdm
 	need dbus
 	need net
-}
-
-start() {
-	ebegin "Configuring Sabayon Steam Box if needed"
-	/usr/libexec/sabayon-steambox.sh
-	eend $?
 }
 

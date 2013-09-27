@@ -4,8 +4,7 @@ Before=display-manager.service
 After=sabayonlive.service network.target
 
 [Service]
-Type=oneshot
-RemainAfterExit=true
+Type=simple
 ExecStart=/usr/libexec/sabayon-steambox.sh
 
 [Install]
