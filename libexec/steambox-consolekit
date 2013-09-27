@@ -29,7 +29,6 @@ class Service(dbus.service.Object):
     OBJECT_PATH ="/org/freedesktop/ConsoleKit/Manager"
 
     def __init__(self):
-        self._desktop = os.getenv("DESKTOP_SESSION")
         object_path = self.OBJECT_PATH
         dbus_loop = dbus.mainloop.glib.DBusGMainLoop(set_as_default=True)
         system_bus = dbus.SystemBus(mainloop=dbus_loop)
@@ -42,15 +41,13 @@ class Service(dbus.service.Object):
     def Restart(self):
         sys.stderr.write("SteamBox ConsoleKit Service, Restart() called\n")
         sys.stderr.flush()
-        if self._desktop == "steambox":
-            subprocess.call(["/sbin/reboot"])
+        subprocess.call(["/sbin/reboot"])
 
     @dbus.service.method(BUS_INTERFACE)
     def Stop(self):
         sys.stderr.write("SteamBox ConsoleKit Service, Restart() called\n")
         sys.stderr.flush()
-        if self._desktop == "steambox":
-            subprocess.call(["/sbin/halt"])
+        subprocess.call(["/sbin/halt"])
 
 if __name__ == "__main__":
     try:
