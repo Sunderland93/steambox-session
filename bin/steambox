@@ -2,5 +2,8 @@
 
 xsetroot -solid black &
 metacity --replace &
+if [ -x /usr/libexec/gnome-settings-daemon ]; then
+	/usr/libexec/gnome-settings-daemon --replace &
+fi
 
 exec /usr/bin/steam-manager
