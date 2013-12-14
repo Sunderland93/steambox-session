@@ -4,7 +4,7 @@ SABAYON_USER=$(cat /etc/sabayon/steambox-user 2>/dev/null)
 . /sbin/sabayon-functions.sh
 
 _set_gdm_session() {
-    if [ ! -x /usr/bin/gdm ]; then
+    if [ ! -x /usr/sbin/gdm ] && [ ! -x /usr/bin/gdm ]; then
         return 0
     fi
 
