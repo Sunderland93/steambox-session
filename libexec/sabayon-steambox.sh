@@ -3,33 +3,12 @@
 SABAYON_USER=$(cat /etc/sabayon/steambox-user 2>/dev/null)
 . /sbin/sabayon-functions.sh
 
-_set_gdm_session() {
-    if [ ! -x /usr/sbin/gdm ] && [ ! -x /usr/bin/gdm ]; then
-        return 0
-    fi
-
-    if [ -x "/usr/libexec/gdm-set-default-session" ]; then
-        # TODO: remove this in 6 months
-        # oh my fucking glorious god, this
-        # is AccountsService bullshit
-        # cross fingers
-        /usr/libexec/gdm-set-default-session "${1}"
-    fi
-    if [ -x "/usr/libexec/gdm-set-session" ]; then
-        # GDM 3.6 support
-        /usr/libexec/gdm-set-session "${LIVE_USER}" "${1}"
-    fi
-}
-
 if sabayon_is_steambox; then
 
     _HOME="/home/${LIVE_USER}"
     echo "Sabayon Steam Box mode enabled, user: ${LIVE_USER}"
 
-    echo "[Desktop]" > "${_HOME}"/.dmrc
-    echo "Session=steambox" >> "${_HOME}"/.dmrc
-    chown "${LIVE_USER}" "${_HOME}"/.dmrc
-    _set_gdm_session steambox
+    sabayon_setup_desktop_session "${LIVE_USER}" "steambox"
     sabayon_setup_autologin
 
     # dive into the final executable
@@ -40,7 +19,14 @@ fi
 if ! sabayon_is_live && ! sabayon_is_steambox; then
     echo "Sabayon Steam Box mode disabled"
     sabayon_disable_autologin
-    _set_gdm_session gnome
+
+    # KDE or GNOME only for now
+    if [ -e /usr/share/xsessions/KDE-4.desktop ]; then
+        sess="KDE-4"
+    else
+        sess="gnome"
+    fi
+    sabayon_setup_desktop_session "${LIVE_USER}" "${sess}"
 fi
 
 while true; do
