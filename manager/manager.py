@@ -40,16 +40,28 @@ class Manager(object):
         self._on_logout()
 
     def _on_steam(self, _widget):
-        self._exec("/usr/bin/steambox-run", [], os.environ)
+        pass # self._exec("/usr/bin/steambox-run", [], os.environ)
 
     def _on_logout(self, _widget):
         os.killpg(os.getpgid(0), signal.SIGTERM)
         time.sleep(5)
         os.killpg(os.getpgid(0), signal.SIGKILL)
 
+    def _setup_cursor(self):
+        cursor = Gdk.Cursor(Gdk.CursorType.TARGET)
+        gdk_w = self._window.get_root_window()
+        gdk_w.set_cursor(cursor)
+
+    def _unsetup_cursor(self):
+        cursor = Gdk.Cursor(Gdk.CursorType.ARROW)
+        gdk_w = self._window.get_root_window()
+        gdk_w.set_cursor(cursor)
+
     def _win_setup(self):
         self._window.connect("delete-event", self._on_delete)
         self._window.connect("draw", self._on_win_draw)
+        self._window.connect("enter-notify-event", self._on_win_enter)
+        self._window.connect("leave-notify-event", self._on_win_leave)
 
         self._window.set_app_paintable(True)
         screen = self._window.get_screen()
@@ -61,9 +73,7 @@ class Manager(object):
         self._window.show()
         self._window.set_keep_below(True)
 
-        cursor = Gdk.Cursor(Gdk.CursorType.TARGET)
-        gdk_w = self._window.get_root_window()
-        gdk_w.set_cursor(cursor)
+        self._setup_cursor()
 
         self._on_steam(None)
 
@@ -71,6 +81,12 @@ class Manager(object):
         cr.set_source_rgba(0.2, 0.2, 0.2, 1.0)
         cr.set_operator(cairo.OPERATOR_SOURCE)
         cr.paint()
+
+    def _on_win_enter(self, _widget, _event):
+        self._setup_cursor()
+
+    def _on_win_leave(self, _widget, _event):
+        self._unsetup_cursor()
 
     def run(self):
         """
