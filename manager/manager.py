@@ -40,7 +40,7 @@ class Manager(object):
         self._on_logout()
 
     def _on_steam(self, _widget):
-        pass # self._exec("/usr/bin/steambox-run", [], os.environ)
+        self._exec("/usr/bin/steambox-run", [], os.environ)
 
     def _on_logout(self, _widget):
         os.killpg(os.getpgid(0), signal.SIGTERM)
