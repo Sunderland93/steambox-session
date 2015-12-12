@@ -13,4 +13,4 @@ if [ -n "${is_optimus}" ]; then
 fi
 
 
-exec ${wrapper} /usr/bin/steam steam://open/bigpicture
+exec ${wrapper} /usr/games/steam steam://open/bigpicture
