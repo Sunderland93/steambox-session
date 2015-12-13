@@ -1,16 +1,15 @@
 #!/bin/bash
 
-export STEAM_RUNTIME=1
+export SDL_VIDEO_MINIMIZE_ON_FOCUS_LOSS=0
 
-wrapper=
-is_optimus=$(cat /proc/cmdline | grep optimus)
-if [ -n "${is_optimus}" ]; then
-    if [ -e /usr/bin/primusrun ]; then
-        wrapper=/usr/bin/primusrun
-    elif [ -e /usr/bin/optirun ]; then
-        wrapper=/usr/bin/optirun
-    fi
-fi
+# Disable DPMS and screen blanking 
+xset -dpms
+xset s off
 
+#Set optirun as wrapper if available
+which optirun && wrapper=optirun
 
-exec ${wrapper} /usr/games/steam steam://open/bigpicture
+#Set primusrun as wrapper if available
+which primusrun && wrapper=vblank_mode=0 optirun -b primus
+
+exec ${wrapper} /usr/games/steam -bigpicture
