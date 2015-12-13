@@ -1,9 +1,9 @@
 #!/bin/bash
 
 xsetroot -solid black &
-marco --replace &
-if [ -x /usr/libexec/gnome-settings-daemon ]; then
-	/usr/libexec/gnome-settings-daemon --replace &
-fi
+metacity --replace --no-composite &
+
+which nvidia-settings && nvidia-settings -l 
+which gnome-settings-daemon && gnome-settings-daemon &
 
 exec /usr/bin/steam-manager
