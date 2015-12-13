@@ -6,5 +6,5 @@ metacity --replace --no-composite &
 which nvidia-settings && nvidia-settings -l 
 which gnome-settings-daemon && gnome-settings-daemon &
 
-cd /usr/lib/steam-manager || exit 1
+cd /usr/share/steambox-manager || exit 1
 exec ./manager.py
